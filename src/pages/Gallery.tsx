@@ -19,15 +19,17 @@ interface GalleryItem {
 const GalleryCard = React.memo(({ item, onClick }: { item: GalleryItem, onClick: (item: GalleryItem) => void }) => {
   // Optimization: add simple query params for Unsplash/Cloudinary patterns if detected
   const optimizedUrl = useMemo(() => {
-    if (!item.imageUrl) return 'https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?auto=format&fit=crop&q=80&w=400';
+    if (!item.imageUrl) return null;
     if (item.imageUrl.includes('unsplash.com')) {
       return `${item.imageUrl}&w=400&q=80`;
     }
     if (item.imageUrl.includes('cloudinary.com')) {
+
       return item.imageUrl.replace('/upload/', '/upload/w_400,q_80/');
     }
     return item.imageUrl;
   }, [item.imageUrl]);
+
 
   return (
     <motion.div
@@ -41,12 +43,14 @@ const GalleryCard = React.memo(({ item, onClick }: { item: GalleryItem, onClick:
       <GlassCard className="!p-0 overflow-hidden border border-transparent hover:border-gold/30 transition-all duration-300 flex flex-col h-full group">
         {/* Poster Image */}
         <div className="h-56 w-full overflow-hidden bg-black/60 shrink-0 rounded-t-2xl flex items-center justify-center relative">
-          <img
-            src={optimizedUrl}
-            alt={item.title}
-            loading="lazy"
-            className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-105"
-          />
+          {optimizedUrl && (
+            <img
+              src={optimizedUrl}
+              alt={item.title}
+              loading="lazy"
+              className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-105"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/80 via-transparent to-transparent opacity-60 pointer-events-none" />
         </div>
 

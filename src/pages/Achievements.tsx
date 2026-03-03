@@ -15,12 +15,14 @@ const AchievementCard = ({ achievement }: { achievement: any }) => {
       <GlassCard className="!p-0 overflow-hidden border border-transparent hover:border-gold/30 transition-all duration-300 flex flex-col h-full group">
         {/* Top Image */}
         <div className="h-56 w-full overflow-hidden bg-black/60 shrink-0 rounded-t-2xl flex items-center justify-center">
-          <img
-            src={achievement.imageUrl || 'https://images.unsplash.com/photo-1523240715634-d1c651177e4d?auto=format&fit=crop&q=80&w=400'}
-            alt={achievement.title}
-            loading="lazy"
-            className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-105"
-          />
+          {achievement.imageUrl && (
+            <img
+              src={achievement.imageUrl}
+              alt={achievement.title}
+              loading="lazy"
+              className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-105"
+            />
+          )}
         </div>
 
         {/* Info */}

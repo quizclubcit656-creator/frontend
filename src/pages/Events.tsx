@@ -143,13 +143,15 @@ const Events = () => {
                   >
                     <div className="group relative overflow-hidden flex flex-col h-full bg-[#1e1e2e]/90 backdrop-blur-md border border-gold/20 hover:border-gold/50 rounded-[2rem] transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,215,0,0.15)]">
                       {/* Image Header */}
-                      <div className="relative h-56 overflow-hidden rounded-t-[2rem]">
-                        <img
-                          src={event.imageUrl || 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80'}
-                          alt={event.title}
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                        />
+                      <div className="relative h-56 overflow-hidden rounded-t-[2rem] bg-black/60 flex items-center justify-center">
+                        {event.imageUrl && (
+                          <img
+                            src={event.imageUrl}
+                            alt={event.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                          />
+                        )}
                         <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e2e] via-[#1e1e2e]/40 to-transparent opacity-90" />
 
                         {/* Status Badge - Vivid Gold with Glow */}
